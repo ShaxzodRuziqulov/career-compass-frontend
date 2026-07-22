@@ -17,4 +17,4 @@ jobs:
           script: |
             cd ~/kasb-kompas/career-compass-backend && git pull
             cd ~/kasb-kompas/career-compass-frontend && git pull
-            cd ~/kasb-kompas/career-compass-backend/deploy && docker compose up -d --build
+            cd ~/kasb-kompas/career-compass-backend/deploy && docker compose up -d --build web
