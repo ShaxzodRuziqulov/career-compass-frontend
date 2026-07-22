@@ -20,11 +20,11 @@ const errorMessage = ref('')
 const advancing = ref(false)
 
 const scaleOptions = [
-  { value: 1, emoji: '😣', label: 'Mutlaqo rozi emasman' },
-  { value: 2, emoji: '🙁', label: 'Rozi emasman' },
-  { value: 3, emoji: '😐', label: 'Bilmayman' },
-  { value: 4, emoji: '🙂', label: 'Roziman' },
-  { value: 5, emoji: '😄', label: 'Mutlaqo roziman' },
+  { value: 1, emoji: '😣', label: 'Hech qachon bunday qilmayman' },
+  { value: 2, emoji: '🙁', label: 'Kamdan-kam qilaman' },
+  { value: 3, emoji: '😐', label: 'Ba\'zan qilaman' },
+  { value: 4, emoji: '🙂', label: 'Ko\'pincha shunday qilaman' },
+  { value: 5, emoji: '😄', label: 'Doim shunday qilaman' },
 ]
 
 const currentQuestion = computed<Question | null>(() => questions.value[currentIndex.value] ?? null)

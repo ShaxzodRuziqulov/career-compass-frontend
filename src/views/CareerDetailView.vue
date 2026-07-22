@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { getCareerDetail } from '../api/careers'
 import { ApiError } from '../api/http'
 import type { CareerDetail } from '../types/api'
 
 const props = defineProps<{ id: string }>()
+
+const route = useRoute()
+const cameFromResult = computed(() => route.query.from === 'result')
 
 const career = ref<CareerDetail | null>(null)
 const roadmap = computed(() => career.value?.roadmap ?? null)
@@ -35,7 +39,8 @@ watch(() => props.id, loadCareer, { immediate: true })
 
 <template>
   <section>
-    <RouterLink to="/careers" class="back-link">&larr; Kasblar ro'yxatiga qaytish</RouterLink>
+    <RouterLink v-if="cameFromResult" to="/result" class="back-link">&larr; Natijalarimga qaytish</RouterLink>
+    <RouterLink v-else to="/careers" class="back-link">&larr; Kasblar ro'yxatiga qaytish</RouterLink>
 
     <div v-if="loading" class="loading">Yuklanmoqda...</div>
     <div v-else-if="errorMessage" class="error-box">{{ errorMessage }}</div>

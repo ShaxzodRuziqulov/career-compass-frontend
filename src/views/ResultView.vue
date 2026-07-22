@@ -40,7 +40,7 @@ onMounted(() => {
       <span class="hero-eyebrow">Senga eng mos kasb</span>
       <h1>{{ topCareer.nameUz }}</h1>
       <span class="hero-match">{{ topCareer.matchPercent }}% moslik</span>
-      <RouterLink :to="`/careers/${topCareer.careerId}`" class="btn hero-btn">Batafsil ko'rish →</RouterLink>
+      <RouterLink :to="{ path: `/careers/${topCareer.careerId}`, query: { from: 'result' } }" class="btn hero-btn">Batafsil ko'rish →</RouterLink>
     </div>
 
     <h2 class="section-title">Qiziqishlar profili</h2>
@@ -75,7 +75,7 @@ onMounted(() => {
       <RouterLink
         v-for="(career, i) in restCareers"
         :key="career.careerId"
-        :to="`/careers/${career.careerId}`"
+        :to="{ path: `/careers/${career.careerId}`, query: { from: 'result' } }"
         class="card career-card fade-in-up"
         :style="{ animationDelay: i * 0.06 + 's' }"
       >
