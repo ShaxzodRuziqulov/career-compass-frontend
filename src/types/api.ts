@@ -5,6 +5,12 @@ export interface Question {
   weight: number
 }
 
+export interface QuestionRequest {
+  traitCode: string
+  textUz: string
+  weight: number
+}
+
 export interface AnswerItem {
   questionId: number
   value: number
@@ -45,6 +51,25 @@ export interface CareerDetail {
   nameUz: string
   description: string
   roadmap: Roadmap | null
+}
+
+export interface CareerCount {
+  careerId: number
+  nameUz: string
+  count: number
+}
+
+export interface DailyCount {
+  date: string
+  count: number
+}
+
+export interface StatsResponse {
+  totalSubmissions: number
+  uniqueSessions: number
+  topCareers: CareerCount[]
+  averageTraitProfile: Record<string, number>
+  dailySubmissions: DailyCount[]
 }
 
 export interface ApiErrorResponse {

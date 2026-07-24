@@ -29,6 +29,16 @@ const router = createRouter({
       component: () => import('../views/CareerDetailView.vue'),
       props: true,
     },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: () => import('../views/StatsView.vue'),
+    },
+    {
+      path: '/admin/questions',
+      name: 'admin-questions',
+      component: () => import('../views/AdminQuestionsView.vue'),
+    },
   ],
 })
 

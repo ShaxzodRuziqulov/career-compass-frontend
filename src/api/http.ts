@@ -1,11 +1,20 @@
 import axios from 'axios'
 import type { ApiErrorResponse } from '../types/api'
+import { clearAdminAuth, getAdminAuth } from '../store/admin'
 
 export const http = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+})
+
+http.interceptors.request.use((config) => {
+  const auth = getAdminAuth()
+  if (auth) {
+    config.headers.Authorization = `Basic ${auth}`
+  }
+  return config
 })
 
 export class ApiError extends Error {
@@ -23,6 +32,10 @@ export class ApiError extends Error {
 http.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Saqlangan parol eskirgan bo'lsa login formasi qayta chiqishi uchun
+    if (error?.response?.status === 401) {
+      clearAdminAuth()
+    }
     const data = error?.response?.data as ApiErrorResponse | undefined
     if (data?.message) {
       return Promise.reject(new ApiError(data.message, data.status, data.fieldErrors))
