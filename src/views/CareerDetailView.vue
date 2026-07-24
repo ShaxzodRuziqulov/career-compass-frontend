@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getCareerDetail } from '../api/careers'
 import { ApiError } from '../api/http'
+import ContourBg from '../components/ContourBg.vue'
 import type { CareerDetail } from '../types/api'
 
 const props = defineProps<{ id: string }>()
@@ -47,8 +48,11 @@ watch(() => props.id, loadCareer, { immediate: true })
 
     <div v-else-if="career" class="fade-in-up">
       <div class="hero-banner">
-        <h1>{{ career.nameUz }}</h1>
-        <p class="description">{{ career.description }}</p>
+        <ContourBg variant="ink" />
+        <div class="hero-content">
+          <h1>{{ career.nameUz }}</h1>
+          <p class="description">{{ career.description }}</p>
+        </div>
       </div>
 
       <div v-if="roadmap" class="roadmap">
@@ -75,20 +79,32 @@ watch(() => props.id, loadCareer, { immediate: true })
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 600;
+  color: var(--accent);
   text-decoration: none;
 }
 
+.back-link:hover {
+  color: var(--accent-hover);
+}
+
 .hero-banner {
-  background: var(--accent-gradient);
+  position: relative;
+  overflow: hidden;
+  background: var(--accent);
   border-radius: 24px;
   padding: 32px 28px;
-  color: #fff;
+  color: var(--accent-contrast);
   margin-bottom: 24px;
   box-shadow: var(--shadow-lg);
 }
 
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-banner h1 {
-  color: #fff;
+  color: var(--accent-contrast);
   margin-bottom: 10px;
 }
 

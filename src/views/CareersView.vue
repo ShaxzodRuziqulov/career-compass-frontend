@@ -126,19 +126,20 @@ watch(activeTraitCode, (code) => loadCareers(code), { immediate: true })
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 6px;
 }
 
 .match-badge {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: var(--accent-gradient);
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-family: var(--display);
   font-size: 12px;
   font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 100px;
+  padding: 4px 11px;
+  border-radius: var(--r-chip);
 }
 
 .career-card h2 {

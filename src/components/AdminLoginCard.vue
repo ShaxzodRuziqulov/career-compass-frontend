@@ -125,18 +125,18 @@ async function submit() {
   width: 60px;
   height: 60px;
   margin: 0 auto 20px;
-  border-radius: 18px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-gradient);
-  box-shadow: var(--shadow-lg);
+  background: var(--accent);
+  box-shadow: var(--shadow);
 }
 
 .login-badge svg {
   width: 28px;
   height: 28px;
-  color: #fff;
+  color: var(--accent-contrast);
 }
 
 .login-title {
@@ -168,8 +168,8 @@ async function submit() {
 .field input {
   width: 100%;
   padding: 12px 15px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
   background: var(--bg);
   color: var(--text-h);
   font-size: 15px;

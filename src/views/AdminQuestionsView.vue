@@ -254,21 +254,22 @@ onMounted(() => {
 .field select,
 .field textarea,
 .field input {
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
   background: var(--bg);
   color: var(--text-h);
   font-size: 15px;
   font-family: var(--sans);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .field select:focus,
 .field textarea:focus,
 .field input:focus {
   border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
 .field textarea {
@@ -308,6 +309,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--display);
   font-size: 14px;
   font-weight: 700;
   color: var(--accent);

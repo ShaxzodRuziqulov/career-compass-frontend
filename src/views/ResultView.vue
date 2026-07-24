@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { lastQuizResult } from '../store/quizResult'
 import { getTraitTheme, traitThemes } from '../theme/traits'
 import TraitIcon from '../components/TraitIcon.vue'
+import ContourBg from '../components/ContourBg.vue'
 
 const router = useRouter()
 
@@ -14,8 +15,6 @@ const traitEntries = computed(() => {
 
 const topCareer = computed(() => lastQuizResult.value?.topCareers[0] ?? null)
 const restCareers = computed(() => lastQuizResult.value?.topCareers.slice(1) ?? [])
-
-const blobColors = computed(() => traitEntries.value.slice(0, 3).map(([code]) => getTraitTheme(code).from))
 
 function traitLabel(code: string): string {
   return traitThemes[code]?.label ?? code
@@ -30,17 +29,14 @@ onMounted(() => {
 
 <template>
   <section v-if="lastQuizResult && topCareer" class="result-page">
-    <div class="bg-blobs" aria-hidden="true">
-      <div class="blob blob-1" :style="{ background: blobColors[0] }"></div>
-      <div class="blob blob-2" :style="{ background: blobColors[1] }"></div>
-      <div class="blob blob-3" :style="{ background: blobColors[2] }"></div>
-    </div>
-
     <div class="hero-banner fade-in-up">
-      <span class="hero-eyebrow">Senga eng mos kasb</span>
-      <h1>{{ topCareer.nameUz }}</h1>
-      <span class="hero-match">{{ topCareer.matchPercent }}% moslik</span>
-      <RouterLink :to="{ path: `/careers/${topCareer.careerId}`, query: { from: 'result' } }" class="btn hero-btn">Batafsil ko'rish →</RouterLink>
+      <ContourBg variant="ink" />
+      <div class="hero-content">
+        <span class="hero-eyebrow">Senga eng mos kasb</span>
+        <h1>{{ topCareer.nameUz }}</h1>
+        <span class="hero-match">{{ topCareer.matchPercent }}% moslik</span>
+        <RouterLink :to="{ path: `/careers/${topCareer.careerId}`, query: { from: 'result' } }" class="btn hero-btn">Batafsil ko'rish →</RouterLink>
+      </div>
     </div>
 
     <h2 class="section-title">Qiziqishlar profili</h2>
@@ -94,85 +90,63 @@ onMounted(() => {
   position: relative;
 }
 
-.bg-blobs {
-  position: absolute;
-  inset: -40px -24px;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.28;
-}
-
-.blob-1 {
-  width: 300px;
-  height: 300px;
-  top: -60px;
-  left: -60px;
-}
-
-.blob-2 {
-  width: 260px;
-  height: 260px;
-  top: 320px;
-  right: -80px;
-}
-
-.blob-3 {
-  width: 240px;
-  height: 240px;
-  bottom: 120px;
-  left: 20%;
-}
-
 .hero-banner {
-  background: var(--accent-gradient);
+  position: relative;
+  overflow: hidden;
+  background: var(--accent);
   border-radius: 24px;
   padding: 40px 28px;
   text-align: center;
-  color: #fff;
+  color: var(--accent-contrast);
   margin-bottom: 36px;
   box-shadow: var(--shadow-lg);
 }
 
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-eyebrow {
   display: inline-block;
+  font-family: var(--display);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  opacity: 0.85;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
   margin-bottom: 8px;
 }
 
 .hero-banner h1 {
-  color: #fff;
+  color: var(--accent-contrast);
   font-size: 32px;
   margin-bottom: 10px;
 }
 
 .hero-match {
   display: inline-block;
+  font-family: var(--display);
   font-size: 15px;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.2);
   padding: 6px 16px;
-  border-radius: 100px;
+  border-radius: var(--r-chip);
   margin-bottom: 22px;
 }
 
 .hero-btn {
-  background: #fff;
+  background: var(--card-bg);
   color: var(--accent);
-  box-shadow: none;
+  box-shadow: var(--shadow);
   display: block;
   width: fit-content;
   margin: 0 auto;
+}
+
+.hero-btn:hover {
+  background: var(--bg);
+  color: var(--accent-hover);
 }
 
 .section-title {

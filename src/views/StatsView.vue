@@ -243,8 +243,8 @@ onMounted(() => {
 .chart-bar {
   width: 100%;
   max-width: 26px;
-  border-radius: 4px 4px 0 0;
-  background: var(--accent-gradient);
+  border-radius: 5px 5px 0 0;
+  background: var(--accent);
   transition: height 0.6s ease, opacity 0.2s;
 }
 
@@ -292,12 +292,11 @@ onMounted(() => {
 }
 
 .total-number {
+  font-family: var(--display);
   font-size: 44px;
-  font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--accent);
 }
 
 .total-label {

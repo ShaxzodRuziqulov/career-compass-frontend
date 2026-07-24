@@ -115,12 +115,10 @@ async function handleSubmit() {
       <div
         class="question-card"
         :style="{
-          borderColor: theme.from + '4d',
-          boxShadow: `0 24px 56px -28px ${theme.from}80`,
+          borderColor: theme.from,
+          boxShadow: `5px 5px 0 ${theme.from}2e`,
         }"
       >
-        <div class="glow" :style="{ background: theme.from }" aria-hidden="true"></div>
-
         <Transition name="slide" mode="out-in">
           <div :key="currentQuestion.id" class="question-inner">
             <div
@@ -208,10 +206,10 @@ async function handleSubmit() {
 }
 
 .icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-input);
+  border: 1.5px solid var(--border);
   background: var(--card-bg);
   color: var(--text-h);
   font-size: 18px;
@@ -220,7 +218,12 @@ async function handleSubmit() {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  border-color: var(--accent-border);
+  color: var(--accent);
 }
 
 .icon-btn:disabled {
@@ -231,14 +234,14 @@ async function handleSubmit() {
 .progress-track {
   flex: 1;
   height: 8px;
-  border-radius: 4px;
+  border-radius: var(--r-chip);
   background: var(--border);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: var(--r-chip);
   transition: width 0.4s ease, background-color 0.5s ease;
 }
 
@@ -254,8 +257,8 @@ async function handleSubmit() {
 .question-card {
   position: relative;
   background: var(--card-bg);
-  border: 1.5px solid var(--border);
-  border-radius: 24px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
   padding: 36px 28px;
   display: flex;
   flex-direction: column;
@@ -263,20 +266,6 @@ async function handleSubmit() {
   text-align: center;
   overflow: hidden;
   transition: border-color 0.5s ease, box-shadow 0.5s ease;
-}
-
-.glow {
-  position: absolute;
-  top: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.22;
-  transition: background-color 0.5s ease;
-  pointer-events: none;
 }
 
 .question-inner {
@@ -288,9 +277,9 @@ async function handleSubmit() {
 }
 
 .question-icon-badge {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -304,10 +293,12 @@ async function handleSubmit() {
 }
 
 .question-text {
+  font-family: var(--display);
   color: var(--text-h);
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 138%;
+  letter-spacing: -0.01em;
+  line-height: 132%;
   margin: 0 0 28px;
 }
 
@@ -324,13 +315,13 @@ async function handleSubmit() {
   gap: 14px;
   width: 100%;
   padding: 14px 18px;
-  border-radius: 14px;
+  border-radius: var(--r-btn);
   border: 1.5px solid var(--border);
-  background: transparent;
+  background: var(--card-bg);
   color: var(--text-h);
   font: inherit;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
@@ -338,11 +329,14 @@ async function handleSubmit() {
 
 .option-btn:hover:not(:disabled) {
   background: var(--accent-bg);
+  border-color: var(--accent-border);
 }
 
 .option-btn.selected {
   color: #fff;
-  transform: scale(1.02);
+  border-color: transparent;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 rgba(var(--shadow-color), 0.16);
 }
 
 .option-btn:disabled {
